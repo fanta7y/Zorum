@@ -1,0 +1,8 @@
+html{
+    --red:  #E32636;
+    --blue: #4d84e2;
+    --tree: #4fa84f;
+    --pink: #e953a3;
+    --zorum: linear-gradient(199deg, #5AFF57 13.06%, #1A7070 100.15%);
+    --atrium: linear-gradient(207deg, #2E1E94 16.67%, #9D55D5 100%);
+}

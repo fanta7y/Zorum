@@ -1,0 +1,88 @@
+.nav {
+  display: flex;
+  justify-content: center;
+}
+.nav-static {
+  position: static;
+  visibility: hidden;
+  padding: 20px;
+}
+.flexnav {
+  position: fixed;
+  z-index: 100;
+  background-color: rgba(var(--rbg), 0.4);
+  backdrop-filter: blur(20px);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-top: 0;
+}
+.flexnav .bk {
+  z-index: 101;
+  padding: 20px 50px;
+  border-bottom: solid 3px var(--blue);
+}
+.flexnav .bk i {
+  margin-right: 10px;
+  color: var(--blue);
+}
+.bk:hover {
+  animation: blink 0.2s linear forwards;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: var(--gr);
+}
+
+/* Show the dropdown menu on hover */
+.bk:hover .dropdown-content {
+  visibility: visible;
+}
+.flexnav .bk a {
+  color: var(--font);
+  text-decoration: none;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  margin-top: 60px;
+  top: 0;
+  display: block;
+  visibility: hidden;
+  position: absolute;
+  background-color: var(--bg);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+  z-index: -1;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  text-align: left;
+  color: var(--font);
+  padding: 20px 40px;
+  text-decoration: none;
+  display: grid;
+  grid-template-columns: 20% 10% 70%;
+}
+.dropdown {
+  display: flex;
+  justify-content: center;
+}
+.bk{
+  text-align: center;
+}
+
+@media screen and (max-width: 870px) {
+  .flexnav .bk{
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    height: 100px;
+    width: calc(100vw / 4);
+  }
+}

@@ -1,0 +1,30 @@
+.err-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.err-text{
+    font-size: 2em;
+}
+.err-text h1{
+    font-size: 4em;
+    color: var(--red);
+    text-align: center;
+}
+.err-fla{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.err-a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.err-text p{
+    text-align: center;
+}
+#err-slash{
+    font-size: 2em;
+}

@@ -1,0 +1,42 @@
+<div class="nav">
+  <div class="flexnav">
+    <p class="bk">
+      <a href="/"><i class="fas fa-home"></i>Home</a>
+    </p>
+    <p class="bk">
+      <a href="/about"><i class="fas fa-info-circle"></i>Info</a>
+    </p>
+    <div class="bk dropdown" id="profilebk">
+      <div>
+        <a
+          href="/<%if(session.auth) {%><%=session.user.username%><%} else {%>auth<%}%>"
+          ><i class="fas fa-user-circle"></i></a
+        >Profile
+      </div>
+
+      <div class="dropdown-content">
+        <a href="/params"
+          ><div class="idiv"><i class="fas fa-cog"></i></div>
+          <div></div>
+          <p>Settings</p></a
+        >
+        <%if(session.auth) {%>
+        <a href="/friends"
+          ><div class="idiv"><i class="fas fa-user-friends"></i></div>
+          <div></div>
+          <p>Friends</p></a
+        ><%}%>
+        <a href="/logout"
+          ><div class="idiv">
+            <i
+              class="<%if(session.auth) {%>fas fa-sign-out-alt<%} else {%>fas fa-sign-in-alt<%}%>"
+            ></i>
+          </div>
+          <div></div>
+          <p><%if(session.auth) {%>Log Out<%} else {%>Log In<%}%></p></a
+        >
+      </div>
+    </div>
+    <p class="bk"><i class="fas fa-bell"></i>Notices</p>
+  </div>
+</div>

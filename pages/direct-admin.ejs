@@ -1,0 +1,62 @@
+<%- include('./particles/header.ejs') %>
+<title>ReDirect Home</title>
+<!-- Создание меню на сайте (без функций) -->
+<!-- Основная часть страницы -->
+<div class="container">
+  <form action="/" id="messForm">
+    <textarea
+      name="text"
+      id="messInput"
+      cols="30"
+      rows="10"
+      required
+      placeholder="Сообщение"
+    ></textarea>
+    <input type="submit" value="SEND" />
+  </form>
+  <ul id="messParent">
+    <% console.log(msg); for(let i=0; i < msg.length; i++){%>
+    <li
+      style="color: <%if(msg[i].send == 1) {%>var(  --red)<%} else {%>var(--blue)<%}%>"
+    >
+      <%if(msg[i].send == 1) {%><%=msg[i].from.username%><%} else
+      {%><%=msg[i].username%><%}%>: <%= msg[i].text.text %>
+    </li>
+    <%}%>
+  </ul>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  let form = document.getElementById("messForm");
+  let input = document.getElementById("messInput");
+  let parent = document.getElementById("messParent");
+  let socket = io.connect();
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    socket.emit("team mess", {
+      mess: input.value,
+      user: {
+        id: "<%= session.user.id %>",
+        username: "<%=session.user.username%>",
+        recieve: "<%=user%>",
+      },
+      team: Number("<%=id%>"),
+      is: true,
+    });
+    input.value = "";
+  });
+
+  socket.on("tmess " + "<%=id%>", (data) => {
+    console.log("Сообщение получено техподдержкой");
+    let li = document.createElement("li");
+    let user = data.user;
+    if (user.username == user.recieve) {
+      li.style.color = "var(--blue)";
+    } else {
+      li.style.color = "var(--red)";
+    }
+    li.innerText = data.user.username + ": " + data.mess;
+    parent.appendChild(li);
+  });
+</script>
+<%- include('./particles/footer.ejs') %>

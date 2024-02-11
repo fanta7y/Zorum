@@ -1,0 +1,167 @@
+.signin-signup {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  flex-direction: row;
+}
+html {
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0rem 5rem;
+  width: 500px;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 2.2rem;
+  color: var(--font);
+  margin-bottom: 10px;
+}
+
+.input-field {
+  max-width: 380px;
+  width: 100%;
+  background-color: var(--gr);
+  margin: 10px 0;
+  height: 55px;
+  border-radius: 55px;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  padding: 0 0.4rem;
+  position: relative;
+}
+
+.input-field i {
+  text-align: center;
+  line-height: 55px;
+  color: var(--font);
+  font-size: 1.1rem;
+}
+
+.input-field input,select {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--font);
+}
+
+.input-field input::placeholder, select::placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
+
+.social-text {
+  padding: 0.7rem 0;
+  font-size: 1rem;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+}
+
+.social-icon {
+  height: 46px;
+  width: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.45rem;
+  color: #333;
+  border-radius: 50%;
+  border: 1px solid #333;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.social-icon:hover {
+  color: var(--blue);
+  border-color: var(--blue);
+}
+
+.btn {
+  width: 150px;
+  background-color: var(--blue);
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: var(--bg);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--blue);
+}
+.panels-container {
+  position: absolute;
+  height: 100vh;
+  width: 100svw;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+
+
+.btn.transparent {
+  margin: 0;
+  background: none;
+  border: 2px solid var(--bg);
+  width: 130px;
+  height: 41px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* ANIMATION */
+
+
+@media (max-width: 870px) {
+  .signin-signup{
+    flex-direction: column;
+    height: auto;
+    padding: 0;
+    margin: 0;
+  }
+
+  .btn.transparent {
+    width: 110px;
+    height: 35px;
+    font-size: 0.7rem;
+  }
+  form {
+    padding: 0;
+    margin: 0;
+    position: sticky;
+    height: 100vh;
+    width: 100%;
+  }
+}
+
+@media (max-width: 570px) {
+  form {
+    padding: 0 1.5rem;
+  }
+}
+button:active, button:hover, input[type=submit]:hover, input[type=submit]:active{
+  background-color: var(--font);
+}

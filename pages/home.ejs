@@ -1,0 +1,35 @@
+<%- include('particles/header.ejs') %>
+<title>RedArrow</title>
+<%- include('particles/nav.ejs') %>
+<div class="container-search">
+  <%if (session.auth) {%>
+  <div class="btns">
+    <a href="/direct#msg">
+      <div class="far">
+        <i class="far fa-comment"></i>
+        <div>1</div>
+      </div>
+    </a>
+    <a href="/direct#hub">
+      <div class="far">
+        <i class="far fa-building"></i>
+        <div>3</div>
+      </div>
+    </a>
+    <a href="/direct#mail">
+      <div class="far">
+        <i class="far fa-envelope"></i>
+        <div>2</div>
+      </div>
+    </a>
+  </div>
+  
+  <%}%>
+  <form action="https://google.com/search">
+    <div class="search">
+      <input type="search" name="q" required placeholder="SEARCH" />
+    </div>
+  </form>
+</div>
+
+<%- include('particles/footer.ejs') %>

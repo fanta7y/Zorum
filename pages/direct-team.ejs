@@ -1,0 +1,37 @@
+<%- include('particles/header.ejs') %>
+
+<div class="container">
+    <ul>
+        <% console.log(session.user.teams[2]);
+            for(let i = 0; i < session.user.createdTeams.length; i++) {%>
+            <li>
+                <span style="font-weight: bold;  color: var(--blue);"><%= session.user.createdTeams[i].name %> : </span>
+                <%=session.user.createdTeams[i].title%>
+                <%=session.user.createdTeams[i].id%>
+                <%=session.user.createdTeams[i].num%>
+            </li>
+        <%}%>
+    </ul>
+    <form action="/team" method="post">
+        <h2>Create Team</h2>
+        <input type="text" name="name" id="name" required><br>
+        <input type="text" name="user" value="<%=session.user.username%>" hidden>
+        <textarea name="title" id="title" cols="30" rows="10"></textarea><br>
+        
+        <input type="submit" value="Create"><br>
+    </form>
+    <ul>
+        <%for(let i = 0; i<session.user.teams.length; i++) {%>
+            <li>
+                <span style="font-weight: bold;  color: var(--red);"><%=session.user.teams[i].team.name%>:</span>
+                <%=session.user.teams[i].team.title%>
+            </li>
+        <%}%>
+    </ul>
+    <form action="/team-join" method="post">
+        <h2>Join Team</h2>
+        <input type="text" name="code" id="code" required placeholder="join promocode"><br>
+        <input type="submit" value="Create"><br>
+    </form>
+</div>
+<%- include('particles/footer.ejs') %>

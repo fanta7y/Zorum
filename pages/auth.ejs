@@ -1,0 +1,226 @@
+<%- include('particles/header.ejs') %>
+<%- include('particles/nav.ejs') %>
+<!-- Параметры данной страницы: подключение css файла и заголовок страницы -->
+<title>RedArrow Auth</title>
+<style>
+  @import url(./css/packs/auth.css);
+</style>
+
+<div class='signin-signup'>
+  <form action='/reg' method='post' class='sign-up-form'>
+    <h2 class='title'>
+      <i class='fas fa-user-plus' style='font-size: 0.8em'></i> Sign up
+    </h2>
+    <div class='input-field'>
+      <i class='fas fa-at' style='color: var(--blue)' title='Username'></i>
+      <input
+        type='text'
+        name='username'
+        id='username'
+        placeholder='Username'
+        required
+        style='color: var(--blue)'
+      />
+    </div>
+    <p id='ocup' style='color: var(--red); display: none'>
+      Sorry, but this username is occupied
+    </p>
+    <p id='short' style='color: var(--red); display: none'>
+      Sorry, but username cannot be shorter than 3 characters
+    </p>
+    <p id='symb' style='color: var(--red); display: none'>
+      Sorry, but username can include only numbers, roman letters and characters
+      like . - _
+    </p>
+    <p id='nan' style='color: var(--red); display: none'>
+      Sorry, but username must start with a letter.
+    </p>
+    <div class='input-field'>
+      <i class='fas fa-user' title='Name'></i>
+      <input type='text' name='name' placeholder='Name' required id='name' />
+    </div>
+    <div class='input-field'>
+      <i class='fas fa-user' title='Surname'></i>
+      <input
+        type='text'
+        name='surname'
+        placeholder='Surname'
+        required
+        id='surname'
+      />
+    </div>
+    <div class='input-field'>
+      <i class='fas fa-envelope' title='Email'></i>
+      <input type='email' placeholder='Email' required name='email' />
+    </div>
+    <div class='input-field'>
+      <i class='fas fa-user-tag' title='Nickname (Showed in profile)'></i>
+      <input
+        type='text'
+        name='nick'
+        placeholder='Nickname (Showed in profile)'
+        required
+        id='nickname'
+      />
+    </div>
+    <div class='input-field'>
+      <i
+        class='fas fa-mars'
+        id='gend'
+        title='Gender'
+        style='color: var(--blue)'
+      ></i>
+      <select name='gender' id='select'>
+        <option value='1'>Male</option>
+        <option value='0'>Female</option>
+        <option value='2'>Other</option>
+      </select>
+    </div>
+    <div class='input-field'>
+      <i class='fas fa-lock' onclick='toggleLock(2)' id='toggle2'></i>
+      <input
+        type='password'
+        name='password'
+        placeholder='Password'
+        autocomplete='off'
+        required
+        id='password2'
+        title='SHOW PASSWORD'
+      />
+    </div>
+    <p id='passhelp' style='color: var(--red); display: none'>
+      Password must be longer than five characters and contain special
+      characters or numbers.
+    </p>
+    <input
+      type='submit'
+      class='btn'
+      value='Sign up'
+      onclick='console.log('reg')'
+      id='regbut'
+      style='background-color: var(--red)'
+    />
+  </form>
+  <form action='/login' method='post' class='sign-in-form'>
+    <h2 class='title'>
+      <i class='fas fa-user-check' style='font-size: 0.8em'></i> Sign in
+    </h2>
+    <div class='input-field'>
+      <i class='fas fa-user' id='orEmailIcon'></i>
+      <input
+        type='text'
+        placeholder='Username or Email'
+        id='orEmail'
+        autocomplete='off'
+        required
+        name='username'
+      />
+    </div>
+    <div class='input-field'>
+      <i
+        class='fas fa-lock'
+        onclick='toggleLock(1)'
+        id='toggle1'
+        title='SHOW PASSWORD'
+      ></i>
+      <input
+        type='password'
+        placeholder='Password'
+        id='password1'
+        name='password'
+        required
+        autocomplete='off'
+      />
+    </div>
+    <input type='submit' value='Login' class='btn solid' id='login1' />
+  </form>
+</div>
+
+  <script src='script/auth.js'></script>
+<script name='username'>
+  function reCurs(arr, el, i) {
+    if (i < arr.length) {
+      if (arr[i].username != el) {
+        if (reCurs(arr, el, i + 1)) {
+          return true;
+        }
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+  let username = document.querySelector('#username'),
+    button = document.querySelector('#regbut'),
+    ocup = document.querySelector('#ocup');
+  short = document.querySelector('#short');
+  symb = document.querySelector('#symb');
+  nan = document.querySelector('#nan');
+  let data = JSON.parse('<%-JSON.stringify(users)%>');
+  button.disabled = true;
+  username.addEventListener('input', () => {
+    button.disabled = true;
+    symb.style.display = 'none';
+    short.style.display = 'none';
+    ocup.style.display = 'none';
+    username.style.color = 'var(--blue)';
+    nan.style.display = 'none';
+    if (username.value != '') {
+      setTimeout(() => {
+        var format = /[ ㅤ`!@#$%^&*()+\=\[\]{};':'\\|,<>\/?~]/;
+        if (username.value.length < 4) {
+          button.disabled = true;
+          username.style.color = 'var(--red)';
+          short.style.display = 'block';
+        } else if (format.test(username.value)) {
+          button.disabled = true;
+          username.style.color = 'var(--red)';
+          symb.style.display = 'block';
+        } else {
+          setTimeout(() => {
+            console.log(reCurs(data, username.value, 0));
+            if (reCurs(data, username.value, 0)) {
+              button.disabled = true;
+              username.style.color = 'var(--red)';
+              ocup.style.display = 'block';
+            } else {
+              button.disabled = false;
+              username.style.color = 'var(--blue)';
+              ocup.style.display = 'none';
+            }
+          }, 1000);
+        }
+      }, 500);
+    } else {
+      setTimeout(() => {
+        button.disabled = true;
+        symb.style.display = 'none';
+        short.style.display = 'none';
+        ocup.style.display = 'none';
+        username.style.color = 'var(--blue)';
+        nan.style.display = 'none';
+      }, 500);
+    }
+  });
+
+  let password = document.querySelector('#password2'),
+    passhelp = document.querySelector('#passhelp');
+  format = /[ ㅤ`!@#$%^&1234567890*()+\=\[\]{};':'\\|,<>\/?~]/;
+  password.addEventListener('input', () => {
+    button.disabled = true;
+    if (password.value != '') {
+      if (format.test(password.value) && password.value.length > 5) {
+        button.disabled = false;
+        passhelp.style.display = 'none';
+      } else {
+        button.disabled = true;
+        passhelp.style.display = 'block';
+      }
+    } else {
+      button.disabled = true;
+      passhelp.style.display = 'none';
+    }
+  });
+</script>
+<%- include('particles/footer.ejs') %>

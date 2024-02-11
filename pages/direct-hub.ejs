@@ -1,0 +1,69 @@
+<%- include('particles/header.ejs') %>
+<title>RedArrow Direct</title>
+<%- include('particles/nav.ejs') %> <%- include('particles/navst.ejs') %>
+<div class="container">
+  <div class="tab">
+    <input checked id="msg" name="tab-btn" type="radio" value="" class="rad" />
+    <label for="msg">Messages</label>
+    <input id="chl" name="tab-btn" type="radio" value="" class="rad" />
+    <label for="chl">Channels</label>
+    <input id="hub" name="tab-btn" type="radio" value="" class="rad" />
+    <label for="hub">Direct</label>
+    <div class="tab-content" id="content-1">
+      <% let dialog = session.user.TeamDialog;
+      if (dialog.length > 0) {
+        console.log('not sorted: ', dialog);
+      dialog.sort((firstItem, secondItem) => firstItem.updated_at - secondItem.updated_at);
+      console.log('sorted: ', dialog);
+      for(let i = 0 ; i < dialog.length;i++){%>
+      <a
+        href="direct/write/<%=dialog[i].team.num%>"
+      >
+        <div class="dialog">
+          <p class="dialogName"><%=dialog[i].team.name%></p>
+          <p class="dialogLab"><%=dialog[i].last_mess.text.text%></p>
+        </div>
+      </a>
+      <%} } else { %>
+      <p class="donthave">You don't have messages</p>
+      <%}%>
+    </div>
+    <div class="tab-content" id="content-2"></div>
+    <div class="tab-content" id="content-3">
+      <%if( session.user.teams.length > 0) { for(let
+      a=0;a<session.user.teams.length; a++){ let rooms =
+      session.user.teams[a].team.TeamDialog; var arr = []; for(let i = 0 ;i < rooms.length;i++){  console.log(rooms[i].last_mess.from); 
+        arr.push(rooms[i])%>
+      <a
+        href="direct/team/<%=rooms[i].team.id%>/<%=rooms[i].user.username%>" class="dialog-a"
+      >
+        <div class="dialog">
+          <p class="dialogName"><%=rooms[i].user.nick%></p>
+          <p class="dialogLab"><%if(rooms[i].last_mess.from) {%>
+            <%if(rooms[i].last_mess.from.username == session.user.username){%>
+              You:<%} else {%><%=rooms[i].last_mess.from.username%> 
+            <%} 
+          } else {%>
+            <%=rooms[i].last_mess.username%>:
+            <%}%>
+            <%=rooms[i].last_mess.text.text%>
+          </p>
+        </div>
+      </a>
+      <%} }
+      if(arr.length == 0) {%>
+        <p class="donthave">You don't have messages</p>
+      <%}
+     } else { %>
+      <p class="donthave">You don't have messages</p>
+      <%}%>
+    </div>
+  </div>
+</div>
+<script>
+  let a = location.hash;
+  console.log(a);
+  let checked = document.querySelector(a);
+  checked.checked = true;
+</script>
+<%- include('particles/footer.ejs') %>

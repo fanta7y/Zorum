@@ -1,0 +1,28 @@
+.container-reg{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container-reg textarea{
+    margin-bottom: 20px;
+    resize: none;
+    background-color: var(--bg);
+    border-radius: 10px;
+    border: solid 5px var(--blue);
+    padding: 30px;
+    color: var(--font);
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;
+}
+.container-reg textarea::placeholder{
+    color: var(--gr);
+    font-size: 1.3em;
+}
+.nextarrow{
+    margin-top: 20px;
+    color: var(--red);
+    font-size: 3em;
+}

@@ -1,0 +1,21 @@
+html {
+  background: var(--bg);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html input, textarea{
+  filter: none;
+  border: none;
+  background-color: var(--gr);
+}
+@keyframes blink {
+  0% {
+    background: transparent;
+  }
+  100% {
+    background-color: var(--gr);
+  }
+}
