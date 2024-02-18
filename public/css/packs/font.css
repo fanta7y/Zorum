@@ -10,6 +10,6 @@ input {
   font-family: "Poppins", sans-serif;
 }
 body a{
-  color: var(--blue);
-  text-decoration: underline;
+  color: var(--font);
+  text-decoration: none;
 }
