@@ -40,6 +40,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .btns .far div{
     color: var(--font);
     font-family: 'Rubik', sans-serif;
